@@ -1,0 +1,5 @@
+Just some notes to help me remember certain things
+
+help files find the proper path:
+===================================
+$LOAD_PATH.unshift File.expand_path('../', __FILE__)

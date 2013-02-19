@@ -23,8 +23,12 @@ class Start
 			@game.print_board
 			@game.winner?
 		end
-		winner = @game.winner
-		puts "winner is  #{player.players[winner]}: #{winner}"
+		if @game.winner?
+			winner = @game.winner
+			puts "winner is  #{player.players[winner]}: #{winner}"
+		else
+			puts "Draw no winner"
+		end
 	end
 	def make_move
 		made_move = false

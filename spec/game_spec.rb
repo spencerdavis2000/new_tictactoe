@@ -1,37 +1,50 @@
-$LOAD_PATH.unshift File.expand_path('../', __FILE__)
 require 'game'
 
 describe Game do
-
-before(:each) do
-  @game = Game.new
-end
-
   it "knows current player" do
-    @game.current_player.should == 'O' 
+    game = Game.new('O')
+    game.current_player.should == 'O'
   end
 
-  it "changes current player after play_move" do
-    @game.play_move(2)
-    @game.current_player.should == 'O'
-    @game.play_move(1)
-    @game.current_player.should == 'X'
+  it "has a board" do
+    game = Game.new('O')
+    game.board.should_not be_nil 
   end
 
-  it "player 1 adds a value to the board" do
-    player_one = @game.play_move(1)
-    @game.change_board(player_one, 3)
-    @game.board.should == ['', '', '', 'X', '', '', '', '', '']
-  end
-  it "player 2 adds a value to the board" do
-    player_two = @game.play_move(2)
-    @game.change_board(player_two, 2)
-    @game.board.should == ['', '', 'O', '', '', '', '', '', '']
+  context "over?" do
+    it "is false if board is empty" do
+      game = Game.new('O')
+      game.board = [' '] * 9
+      game.over?.should be_false
+    end
+
+    it "is false if board has one position occupies" do
+      game = Game.new('O')
+      game.board = ['O'] + [' '] * 8
+      game.over?.should be_false
+    end
+
+    it "is true if board is full" do
+      game = Game.new('O')
+      game.board = ['O'] * 9
+      game.over?.should be_true
+    end
   end
 
+  it "plays a move on board for player 1" do
+    game = Game.new('O')
+    game.play_move(0)
+    game.board.should == ['O'] + [' '] * 8
+  end
+
+  it "plays a move on board for player 2" do
+    game = Game.new('O')
+    game.play_move(0)
+    game.play_move(1)
+    game.board.should == ['O', 'X'] + [' ']*7
+  end
   
 end
-
 # while game.is_not_over?
   # IO - ask user for move
   # GAME LOGIC - game.play_move(move)

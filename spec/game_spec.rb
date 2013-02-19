@@ -43,7 +43,33 @@ describe Game do
     game.play_move(1)
     game.board.should == ['O', 'X'] + [' ']*7
   end
-  
+
+  context "Win?" do
+    it "winner should be false starting out" do
+    game = Game.new('O')
+    game.winner?.should == false
+  end
+  it "winner should be true if X wins and @winner = X" do
+    game = Game.new('O')
+    game.board = ['X', 'X', 'X']*6
+    game.winner?.should == true
+    game.winner.should == 'X'
+  end
+    it "winner should be true if O wins and @winner = O" do
+    game = Game.new('O')
+    game.board = ['O', 'O', 'O']*6
+    game.winner?.should == true
+    game.winner.should == 'O'
+  end
+
+  context "Game Over Win" do
+    it "should return true if there is a win and enter the game" do
+      game = Game.new('O')
+      game.board = ['X', 'X', 'X']*6
+      game.over?.should == true
+    end
+  end
+  end
 end
 # while game.is_not_over?
   # IO - ask user for move

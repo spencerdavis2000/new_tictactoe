@@ -7,21 +7,24 @@ require 'io'
 
 
 class Start
-	attr_reader :value, :player, :game, :validate, :io
+	attr_reader :value, :io, :player, :game, :validate
 
 	def initialize
 		@value = []
 		@io = Io.new
 		@player = Player.new
-		@game = Game.new(@player.player1)
-		@validate = Validator.new
+		@game = Game.new(@player.players.key('player1'))
+		@validate = Validator.new 
 	end
 
 	def play_game
 		while !@game.over?
 			make_move
 			@game.print_board
+			@game.winner?
 		end
+		winner = @game.winner
+		puts "winner is  #{player.players[winner]}: #{winner}"
 	end
 	def make_move
 		made_move = false

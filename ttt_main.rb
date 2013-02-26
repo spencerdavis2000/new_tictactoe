@@ -1,29 +1,37 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'game'
-require 'player'
 require 'pry'
-require 'validator'
+require 'game'
 require 'io'
-
+require 'player'
+require 'validator'
+require 'minimax'
 
 class Start
-	attr_reader :value, :io, :player, :game, :validate
+	attr_reader :io, :player, :game, :validate
+	attr_accessor :computer_opponent
 
 	def initialize
-		@value = []
+		@computer_opponent = true
 		@io = Io.new
 		@player = Player.new
 		@game = Game.new(@player.players.key('player1'))
 		@validate = Validator.new 
+		@minimax = Minimax.new
 	end
 
 	def play_game
 		while !@game.over?
 			make_move
 			@game.print_board
-			@game.winner?
+
+			if @computer_opponent
+				move = @minimax.min_max(@game.board, @game.current_player)
+				@game.play_move(move)
+				@game.print_board
+			end
 		end
-		if @game.winner?
+
+		if @game.win?
 			winner = @game.winner
 			puts "winner is  #{player.players[winner]}: #{winner}"
 		else
@@ -36,8 +44,7 @@ class Start
 			move = @io.input
 			if @validate.is_valid?(move)
 				move -= 1
-				@value << move
-				if @game.board[move] == ' '
+				if @game.board.get_element(move) == ' '
 					@game.play_move(move)
 					made_move = true
 				else
@@ -49,7 +56,6 @@ class Start
 end
 
 binding.pry
-
 
 #Io.print_board(game.board)
 #move = Io.ask_move

@@ -14,19 +14,20 @@ describe Game do
   context "over?" do
     it "is false if board is empty" do
       game = Game.new('O')
-      game.board = [' '] * 9
       game.over?.should be_false
     end
 
     it "is false if board has one position occupies" do
       game = Game.new('O')
-      game.board = ['O'] + [' '] * 8
+      game.board.set_element(0, 'O')
       game.over?.should be_false
     end
 
     it "is true if board is full" do
       game = Game.new('O')
-      game.board = ['O'] * 9
+      (0..9).each do |element|
+        game.board.set_element(element, 'O')
+      end
       game.over?.should be_true
     end
   end
@@ -34,38 +35,45 @@ describe Game do
   it "plays a move on board for player 1" do
     game = Game.new('O')
     game.play_move(0)
-    game.board.should == ['O'] + [' '] * 8
+    game.board.board_state.should == ['O'] + [' '] * 8
   end
 
   it "plays a move on board for player 2" do
     game = Game.new('O')
     game.play_move(0)
     game.play_move(1)
-    game.board.should == ['O', 'X'] + [' ']*7
+    game.board.board_state.should == ['O', 'X'] + [' ']*7
   end
 
   context "Win?" do
     it "winner should be false starting out" do
     game = Game.new('O')
-    game.winner?.should == false
+    game.win?.should == false
   end
   it "winner should be true if X wins and @winner = X" do
     game = Game.new('O')
-    game.board = ['X', 'X', 'X']*6
-    game.winner?.should == true
+    game.board.set_element(0, 'X')
+    game.board.set_element(1, 'X')
+    game.board.set_element(2, 'X')
+    game.win?.should == true
     game.winner.should == 'X'
   end
-    it "winner should be true if O wins and @winner = O" do
+
+  it "winner should be true if O wins and @winner = O" do
     game = Game.new('O')
-    game.board = ['O', 'O', 'O']*6
-    game.winner?.should == true
+    game.board.set_element(0, 'O')
+    game.board.set_element(1, 'O')
+    game.board.set_element(2, 'O')
+    game.win?.should == true
     game.winner.should == 'O'
   end
 
   context "Game Over Win" do
     it "should return true if there is a win and enter the game" do
       game = Game.new('O')
-      game.board = ['X', 'X', 'X']*6
+      game.board.set_element(0, 'X')
+      game.board.set_element(1, 'X')
+      game.board.set_element(2, 'X')
       game.over?.should == true
     end
   end

@@ -3,3 +3,15 @@ Just some notes to help me remember certain things
 help files find the proper path:
 ===================================
 $LOAD_PATH.unshift File.expand_path('../', __FILE__)
+
+Feb 19, 2013
+============
+As of now, I have a pretty good tic tac toe just human against human.
+Now, I need to be able to add an option to play against the computer.
+If I just take the option away for human against human, then I am taking
+away functionality.  Therefore, if I just add the option:
+1.  Human vs. Human
+2.  Human vs. Computer
+
+Then if I pick 2, it will just go to another method block and I don't have 
+to change what is already working.  

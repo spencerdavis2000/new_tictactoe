@@ -35,14 +35,14 @@ describe Game do
   it "plays a move on board for player 1" do
     game = Game.new('O')
     game.play_move(0)
-    game.board.board_state.should == ['O'] + [' '] * 8
+    game.board.board.should == ['O'] + [' '] * 8
   end
 
   it "plays a move on board for player 2" do
     game = Game.new('O')
     game.play_move(0)
     game.play_move(1)
-    game.board.board_state.should == ['O', 'X'] + [' ']*7
+    game.board.board.should == ['O', 'X'] + [' ']*7
   end
 
   context "Win?" do

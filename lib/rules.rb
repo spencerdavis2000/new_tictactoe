@@ -29,9 +29,6 @@ module Rules
 	def over?
 		win? || @board.board.none? {|move| move == ' '}
 	end
-	def print
-		p @board
-		p @board.board
-	end
+
 end
 #binding.pry

@@ -26,19 +26,5 @@ class Game
       @current_player = 'O'
     end
   end
- 
-  def print_board
-    board = @board.board_state
-      board.size.times do |i|
-        indexes = {:first => [1,4,7], :second => [2,5,8], :third => [0,3,6]}
-        if indexes[:first].include?(i)
-          print "|" + board[i] + "|" if indexes[:first].include?(i)
-        elsif indexes[:second].include?(i)
-          print board[i] + "\n"
-        else
-          print board[i]
-        end
-      end
-  end
 end
 #binding.pry

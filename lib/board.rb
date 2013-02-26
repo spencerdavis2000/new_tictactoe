@@ -5,8 +5,6 @@ class Board
 
 	def initialize(board)
 
-		#just pass the state of the game board, or ai board, etc..and keep them
-		# all separate because each one gets initialized with its own board.
 		@board = board 
 	end
 	def set_element(element, value)
@@ -14,13 +12,6 @@ class Board
 	end
 	def get_element(element)
 		@board[element]
-	end
-	def board_state
-		board = []
-		@board.size.times do |i|
-			board << @board[i]
-		end
-		return board
 	end
 	def undo(element)
 		@board[element] = ' '
@@ -34,5 +25,10 @@ class Board
 		end
 		return empty_spots
 	end
+	def print_board
+		puts @board[0] +"|"+ @board[1] +"|"+ @board[2] +"\n"+
+			 @board[3] +"|"+ @board[4] +"|"+ @board[5] +"\n"+
+			 @board[6] +"|"+ @board[7] +"|"+ @board[8] 
+  	end
 end
 #binding.pry

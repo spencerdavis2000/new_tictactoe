@@ -27,11 +27,13 @@ we look for the empty positions and then mark the empty position to get
 starting with 'O' it will mark a move, then it needs to flip to 'X' and mark a move
 ===================================================================
    'O' moves:
+   ==========
 	O|O|X
 	X|X|O
 	O| |X
 
    'X' moves:
+   ==========
 	O|O|X
 	X|X|O
 	O|X|X

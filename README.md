@@ -26,14 +26,14 @@ we look for the empty positions and then mark the empty position to get
 	 | |X
 starting with 'O' it will mark a move, then it needs to flip to 'X' and mark a move
 ===================================================================
-   'O' moves:
-   ==========
+'O' moves:
+==========
 	O|O|X
 	X|X|O
 	O| |X
 
-   'X' moves:
-   ==========
+'X' moves:
+==========
 	O|O|X
 	X|X|O
 	O|X|X

@@ -19,15 +19,19 @@ class Start
 		@minimax = Minimax.new
 	end
 
+	def opponent(player)
+		player == 'O' ? 'X' : 'O'
+	end
+
 	def play_game
 		while !@game.over?
 			make_move
-			@game.print_board
+			@game.board.print_board
 
-			if @computer_opponent
-				move = @minimax.min_max(@game.board, @game.current_player)
+			if @computer_opponent && !@game.over?
+				move = @minimax.best_move(@game.board, opponent(@game.current_player))
 				@game.play_move(move)
-				@game.print_board
+				@game.board.print_board
 			end
 		end
 

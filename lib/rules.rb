@@ -11,10 +11,10 @@ module Rules
 		8 => [2, 4, 6]
 	}
 
-	attr_reader :winner
+	attr_reader :winner 
 	
 	def win?
-		board = @board.board
+		board = @board.board1
 		GROUPS.values.each do |trio|
 			if board[trio[0]] == board[trio[1]] &&
 			   board[trio[0]] == board[trio[2]] &&
@@ -27,7 +27,7 @@ module Rules
 	end
 
 	def over?
-		win? || @board.board.none? {|move| move == ' '}
+		win? || @board.board1.none? {|move| move == ' '}
 	end
 
 end
